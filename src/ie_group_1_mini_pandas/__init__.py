@@ -6,8 +6,6 @@ Customized version of a DataFrame meant to mimic core functionalities of the Pan
 """
 
 import numpy as np
-import pandas as pd
-
 
 class MiniDataFrame:
 
@@ -19,8 +17,8 @@ class MiniDataFrame:
         if data is None:
             data = {}
         
-        if isinstance(data, dict):
-            mgr = init_dict(data, index, columns, dtype=dtype)
+        if isinstance(data, list):
+            output = {value: foo(value) for value in data}
 
     @property
     def get_row(self, index=None):
@@ -40,11 +38,11 @@ class MiniDataFrame:
         Return a list of values corresponding to the sum of each numerical column while ignoring non-numerical columns.
         Examples
         --------
-        >>> df = pd.DataFrame({'col1': [1, 2], 'col2': [3, 4]})
+        >>> df = minipd.DataFrame({'col1': [1, 2], 'col2': [3, 4]})
         >>> df.sum
         (3,7)
         """
-        sum_output = [sum(self.columns[index]) if self.columns[index].datatype == 'a' for index in self.columns]
+        sum_output = [sum(self.columns[index]) for index in self.columns if self.columns[index].isdigit()]
         return sum_output
 
     @property
@@ -53,12 +51,12 @@ class MiniDataFrame:
         Return a list of values corresponding to the median of each numerical column while ignoring non-numerical columns.
         Examples
         --------
-        >>> df = pd.DataFrame({'col1': [1, 2], 'col2': [3, 4]})
+        >>> df = minipd.DataFrame({'col1': [1, 2], 'col2': [3, 4]})
         >>> df.median
         
         """
 
-        median_output = [median(self.columns[index]) if self.columns[index].datatype == 'a' for index in self.columns]
+        median_output = [median(self.columns[index]) for index in self.columns if self.columns[index].isdigit()]
         return median_output
 
     @property
@@ -67,13 +65,13 @@ class MiniDataFrame:
         Return a list of values corresponding to the min of each numerical column while ignoring non-numerical columns.
         Examples
         --------
-        >>> df = pd.DataFrame({'col1': [1, 2], 'col2': [3, 4]})
+        >>> df = minipd.DataFrame({'col1': [1, 2], 'col2': [3, 4]})
         >>> df.min
         (1,3)
 
         """
 
-        min_output = [min(self.columns[index]) if self.columns[index].datatype == 'a' for index in self.columns]
+        min_output = [min(self.columns[index]) for index in self.columns if self.columns[index].isdigit()]
         return min_output
 
     @property
@@ -82,10 +80,10 @@ class MiniDataFrame:
         Return a list of values corresponding to the max of each numerical column while ignoring non-numerical columns.
         Examples
         --------
-        >>> df = pd.DataFrame({'col1': [1, 2], 'col2': [3, 4]})
+        >>> df = minipd.DataFrame({'col1': [1, 2], 'col2': [3, 4]})
         >>> df.max
         (2,4)
 
         """
-        max_output = [max(self.columns[index]) if self.columns[index].datatype == 'a' for index in self.columns]
+        max_output = [max(self.columns[index]) for index in self.columns if self.columns[index].isdigit()]
         return max_output
