@@ -70,6 +70,18 @@ class MiniDataFrame:
         
     def __len__(self):
         return len(self.__dict__)
+
+    @property
+    def get_row(self, index=None):
+        """
+        Return a list representing the corresponding values of the given row.
+        Examples
+        --------
+        >>> df = minipd.MiniDataFrame({'col1': [1, 2], 'col2': [3, 4]})
+        >>> df.getrow(0)
+        (1,2)
+        """
+        return list(self.columns[index])
         
     @property
     def sum(self):
@@ -79,7 +91,7 @@ class MiniDataFrame:
         --------
         >>> df = minipd.DataFrame({'col1': [1, 2], 'col2': [3, 4]})
         >>> df.sum
-        (3,5)
+        (3,7)
         
         """
         _NUMERIC_KINDS = set('buifc')
