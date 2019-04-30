@@ -16,9 +16,28 @@ class MiniDataFrame:
     def __init__(self, data=None, index=None, columns=None, datatype=None):
         if data is None:
             data = {}
+        if datatype is not None:
+            datatype = self._validate_dtype(datatype)
         
-        if isinstance(data, list):
-            output = {value: foo(value) for value in data}
+        self.datatype = datatype
+        
+        if index is None:
+            self.index = list(range(0, len(data), 1))
+        
+        # Check type of data structure entered
+        if isinstance(data, dict):             
+            data_array = []
+            for index, value in data.items():
+                data_array.append(value)
+                
+            self.data = np.transpose(data_array)
+            self.columns = list(data.keys())      
+        else:
+            self.data = np.transpose(data)
+            if columns is None:
+                self.columns = list(data.keys()) 
+            else:
+                self.columns = columns
 
     @property
     def get_row(self, index=None):
@@ -28,10 +47,12 @@ class MiniDataFrame:
         --------
         >>> df = minipd.MiniDataFrame({'col1': [1, 2], 'col2': [3, 4]})
         >>> df.getrow(0)
-        (1,2)
+        (1,3)
         """
-        return list(self.columns[index])
 
+        row = [col[index] for col in self.columns]
+        return row
+            
     @property
     def sum(self):
         """
@@ -42,9 +63,12 @@ class MiniDataFrame:
         >>> df.sum
         (3,7)
         """
-        sum_output = [sum(self.columns[index]) for index in self.columns if self.columns[index].isdigit()]
-        return sum_output
-
+        _NUMERIC_KINDS = set('buifc')
+        sum_output = [sum(self[:,cols]) for cols in self.columns if np.asarray(self[cols]).dtype.kind in _NUMERIC_KINDS]
+        
+        return(sum_output)
+    
+    
     @property
     def median(self):
         """
@@ -55,10 +79,11 @@ class MiniDataFrame:
         >>> df.median
         
         """
+        _NUMERIC_KINDS = set('buifc')     
+        median_output = [np.median(self[:,cols]) for cols in self.columns if np.asarray(self[cols]).dtype.kind in _NUMERIC_KINDS]
 
-        median_output = [median(self.columns[index]) for index in self.columns if self.columns[index].isdigit()]
-        return median_output
-
+        return(median_output)
+    
     @property
     def min(self):
         """
@@ -70,20 +95,24 @@ class MiniDataFrame:
         (1,3)
 
         """
+        _NUMERIC_KINDS = set('buifc')     
+        min_output = [np.min(self[:,cols]) for cols in self.columns if np.asarray(self[cols]).dtype.kind in _NUMERIC_KINDS]
 
-        min_output = [min(self.columns[index]) for index in self.columns if self.columns[index].isdigit()]
         return min_output
-
+    
     @property
     def max(self):
         """
-        Return a list of values corresponding to the max of each numerical column while ignoring non-numerical columns.
+        Return a list of values corresponding to the min of each numerical column while ignoring non-numerical columns.
         Examples
         --------
         >>> df = minipd.DataFrame({'col1': [1, 2], 'col2': [3, 4]})
-        >>> df.max
+        >>> df.min
         (2,4)
 
         """
-        max_output = [max(self.columns[index]) for index in self.columns if self.columns[index].isdigit()]
+        _NUMERIC_KINDS = set('buifc')     
+        max_output = [np.max(self[:,cols]) for cols in self.columns if np.asarray(self[cols]).dtype.kind in _NUMERIC_KINDS]
+        
         return max_output
+    
