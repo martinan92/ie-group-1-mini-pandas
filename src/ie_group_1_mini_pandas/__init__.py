@@ -41,6 +41,7 @@ class MiniDataFrame:
             dtype = dict(names = names, formats=formats)
             data_array = [tuple(item) for item in data_array]
             self.data = np.array(data_array, dtype=dtype)
+
         else:   
             if columns is None:
                 self.columns = list(range(0, len(data), 1))
@@ -57,7 +58,7 @@ class MiniDataFrame:
                 formats = list(all_elements)
                 dtype = dict(names = self.columns, formats=formats)
                 data_array = [tuple(item) for item in data]
-                self.data = np.array(np.transpose(data), dtype=dtype)
+                self.data = np.array(data_array, dtype=dtype)
                 
     def __iter__(self):
         return self.data.items()
@@ -70,6 +71,17 @@ class MiniDataFrame:
         
     def __len__(self):
         return len(self.__dict__)
+    
+    def get_row(self, index=None):
+        """
+        Return a list representing the corresponding values of the given row.
+        Examples
+        --------
+        >>> df = minipd.MiniDataFrame({'col1': [1, 2], 'col2': [3, 4]})
+        >>> df.getrow(0)
+        (1,2)
+        """
+        return self.data[index]
         
     @property
     def sum(self):
