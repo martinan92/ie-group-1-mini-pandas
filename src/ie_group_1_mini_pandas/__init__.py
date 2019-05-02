@@ -79,7 +79,7 @@ class MiniDataFrame:
         --------
         >>> df = minipd.MiniDataFrame({'col1': [1, 2], 'col2': [3, 4]})
         >>> df.getrow(0)
-        (1,2)
+        (1,3)
         """
         return self.data[index]
         
