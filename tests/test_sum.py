@@ -1,6 +1,6 @@
 import pytest
-from ie_nlp_utils import sum_numbers
-from ie_nlp_utils import tokenize
+#from ie_nlp_utils import sum_numbers
+#from ie_nlp_utils import tokenize
 
 def test_sum_two_numbers_gives_expected_result():
     a = 2
