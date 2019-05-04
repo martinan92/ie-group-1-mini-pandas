@@ -44,7 +44,7 @@ class MiniDataFrame:
 
         else:   
             if columns is None:
-                self.columns = list(range(0, len(data), 1))
+                self.columns = list(range(0, len(data[0]), 1))
                 self.data = np.transpose(data)
             else:
                 all_elements = []
@@ -82,6 +82,21 @@ class MiniDataFrame:
         (1,3)
         """
         return self.data[index]
+
+    @property
+    def shape(self):
+        """
+        Return a tuple representing the dimensionality of the DataFrame.
+        See Also
+        --------
+        ndarray.shape
+        Examples
+        --------
+        >>> df = pd.DataFrame({'col1': [1, 2], 'col2': [3, 4]})
+        >>> df.shape
+        (2, 2)
+        """
+        return len(self[self.columns[0]]), len(self.columns)
         
     @property
     def sum(self):
