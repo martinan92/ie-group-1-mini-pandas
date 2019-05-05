@@ -79,11 +79,14 @@ class MiniDataFrame:
         Return a list representing the corresponding values of the given row.
         Examples
         --------
-        >>> df = mini_pd.MiniDataFrame({'col1': [1, 2], 'col2': [3, 4]})
+        >>> df = minipd.MiniDataFrame({'col1': [1, 2], 'col2': [3, 4]})
         >>> df.getrow(0)
-        (1,3)
+        (1,2)
         """
-        return self.data[index]
+        if self.columns == list(range(0, len(self.data[0]), 1)):
+            return self.data[:, index]
+        else:
+            return self.data[index]
 
     @property
     def shape(self):
