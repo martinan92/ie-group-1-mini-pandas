@@ -12,15 +12,15 @@ NumPy
 
 #### User point of view
 In order to install the library you can either:
-    1) Run `python setup.py install` on the same directory of the git repo;
-    2) Install it through pip, using `pip install ie_group_1_mini_pandas`
+    1. Run `python setup.py install` on the same directory of the git repo;
+    2. Install it through pip, using `pip install ie_group_1_mini_pandas`
 
 #### Development point of view
 If you want to contribute and develop further this library, you can install it in development mode:
-    1) Run `python setup.py develop`on the same directory of the git repo;
-    2) Install it through pip, using `pip install ie_group_1_mini_pandas[dev]`
+    1. Run `python setup.py develop`on the same directory of the git repo;
+    2. Install it through pip, using `pip install ie_group_1_mini_pandas[dev]`
 
 #### How to run tests
 In order to run the proper tests, you should proceed as follows:
-    1) make sure you have installed the latest version of pytest;
-    2) run `pytest -v` to visualize the status of each of the tests performed.
+    1. make sure you have installed the latest version of pytest;
+    2. run `pytest -v` to visualize the status of each of the tests performed.
