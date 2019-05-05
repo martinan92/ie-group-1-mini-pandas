@@ -77,7 +77,7 @@ class MiniDataFrame:
         Return a list representing the corresponding values of the given row.
         Examples
         --------
-        >>> df = minipd.MiniDataFrame({'col1': [1, 2], 'col2': [3, 4]})
+        >>> df = mini_pd.MiniDataFrame({'col1': [1, 2], 'col2': [3, 4]})
         >>> df.getrow(0)
         (1,3)
         """
@@ -92,7 +92,7 @@ class MiniDataFrame:
         ndarray.shape
         Examples
         --------
-        >>> df = pd.DataFrame({'col1': [1, 2], 'col2': [3, 4]})
+        >>> df = mini_pd.MiniDataFrame({'col1': [1, 2], 'col2': [3, 4]})
         >>> df.shape
         (2, 2)
         """
@@ -104,7 +104,7 @@ class MiniDataFrame:
         Return a list of values corresponding to the sum of each numerical column while ignoring non-numerical columns.
         Examples
         --------
-        >>> df = minipd.DataFrame({'col1': [1, 2], 'col2': [3, 4]})
+        >>> df = mini_pd.MiniDataFrame({'col1': [1, 2], 'col2': [3, 4]})
         >>> df.sum
         (3,5)
         
@@ -119,7 +119,7 @@ class MiniDataFrame:
         Return a list of values corresponding to the median of each numerical column while ignoring non-numerical columns.
         Examples
         --------
-        >>> df = minipd.DataFrame({'col1': [1, 2], 'col2': [3, 4]})
+        >>> df = mini_pd.MiniDataFrame({'col1': [1, 2], 'col2': [3, 4]})
         >>> df.median
         
         """
@@ -133,7 +133,7 @@ class MiniDataFrame:
         Return a list of values corresponding to the min of each numerical column while ignoring non-numerical columns.
         Examples
         --------
-        >>> df = minipd.DataFrame({'col1': [1, 2], 'col2': [3, 4]})
+        >>> df = mini_pd.MiniDataFrame({'col1': [1, 2], 'col2': [3, 4]})
         >>> df.min
         (1,3)
         
@@ -148,7 +148,7 @@ class MiniDataFrame:
         Return a list of values corresponding to the min of each numerical column while ignoring non-numerical columns.
         Examples
         --------
-        >>> df = minipd.DataFrame({'col1': [1, 2], 'col2': [3, 4]})
+        >>> df = mini_pd.MiniDataFrame({'col1': [1, 2], 'col2': [3, 4]})
         >>> df.min
         (2,4)
 
