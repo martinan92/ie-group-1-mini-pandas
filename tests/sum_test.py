@@ -2,36 +2,17 @@ import pytest
 import numpy as np
 import ie_group_1_mini_pandas as mini_pd
 
+@pytest.mark.parametrize('dic_array, cols, expected_result', 
+    [
+        ({'col1': [2, 4], 'col2': [4, 8]}, None, [6, 12]),
+        ({'col1': [1, 2, 3], 'col2': [4, 5, 6]}, None, [6, 15]),
+        ({'col1': [2, 4], 'col2': [6, 8], 'col3': [10, 12]}, None, [6, 14, 22]),
+        (np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]), ['a', 'b', 'c'], [12, 15, 18]),
+        (np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]), None, [12, 15, 18])
+    ]
+)
 
-def test_sum():
-    dictionary1 = {'col1': [1, 2], 'col2': [3, 4]}
-    mdf1 = mini_pd.MiniDataFrame(dictionary1)
-    sum_mdf1 = mdf1.sum
-    assert sum_mdf1[0] == 3  # col1: 1 + 2
-    assert sum_mdf1[1] == 7  # col2: 3 + 4
-
-    dictionary2 = {'col1': [1, 2, 3], 'col2': [4, 5, 6]}
-    mdf2 = mini_pd.MiniDataFrame(dictionary2)
-    sum_mdf2 = mdf2.sum
-    assert sum_mdf2[0] == 6  # col1: 1 + 2 + 3
-    assert sum_mdf2[1] == 15  # col2: 4 + 5 + 6
-
-    dictionary3 = {'col1': [1, 2], 'col2': [3, 4], 'col3': [5, 6]}
-    mdf3 = mini_pd.MiniDataFrame(dictionary3)
-    sum_mdf3 = mdf3.sum
-    assert sum_mdf3[0] == 3  # col1: 1 + 2
-    assert sum_mdf3[1] == 7  # col2: 3 + 4
-    assert sum_mdf3[2] == 11  # col2: 5 + 6
-
-    array1 = mini_pd.MiniDataFrame(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]),
-                                   columns=['a', 'b', 'c'])
-    sum_array1 = array1.sum
-    assert sum_array1[0] == 12  # col1: 1 + 4 + 7
-    assert sum_array1[1] == 15  # col2: 2 + 5 + 8
-    assert sum_array1[2] == 18  # col2: 3 + 6 + 9
-
-    array2 = mini_pd.MiniDataFrame(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
-    sum_array2 = array2.sum
-    assert sum_array2[0] == 12  # col1: 1 + 4 + 7
-    assert sum_array2[1] == 15  # col2: 2 + 5 + 8
-    assert sum_array2[2] == 18  # col2: 3 + 6 + 9
+def test_sum(dic_array, cols, expected_result):
+    df = mini_pd.MiniDataFrame(dic_array, columns=cols)
+    sum_df = df.sum
+    assert all([a == b for a, b in zip(df.sum, expected_result)])
